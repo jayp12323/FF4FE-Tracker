@@ -9,9 +9,209 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="font\Final Fantasy IV SNES.ttf" />
+    <None Remove="font\kongtext.ttf" />
+    <None Remove="sprites\Armor.gif" />
+    <None Remove="sprites\Arrow.gif" />
+    <None Remove="sprites\Axe.gif" />
+    <None Remove="sprites\Bomb.gif" />
+    <None Remove="sprites\Book.gif" />
+    <None Remove="sprites\Boomerang.gif" />
+    <None Remove="sprites\Bow.gif" />
+    <None Remove="sprites\Claw.gif" />
+    <None Remove="sprites\Clothes.gif" />
+    <None Remove="sprites\Crystal.gif" />
+    <None Remove="sprites\Dagger.gif" />
+    <None Remove="sprites\DarkSword.gif" />
+    <None Remove="sprites\Final_Fantasy_IV_SNES.ttf" />
+    <None Remove="sprites\Gauntlet.gif" />
+    <None Remove="sprites\HandCursor.gif" />
+    <None Remove="sprites\Harp.gif" />
+    <None Remove="sprites\Helmet.gif" />
+    <None Remove="sprites\HolySword.gif" />
+    <None Remove="sprites\Hourglass.gif" />
+    <None Remove="sprites\Illusion.gif" />
+    <None Remove="sprites\Key.gif" />
+    <None Remove="sprites\KnightSword.gif" />
+    <None Remove="sprites\Magma.gif" />
+    <None Remove="sprites\Mallet.gif" />
+    <None Remove="sprites\Menu-Darkness.gif" />
+    <None Remove="sprites\Menu-Mini.gif" />
+    <None Remove="sprites\Menu-Petrification.gif" />
+    <None Remove="sprites\Menu-Pig.gif" />
+    <None Remove="sprites\Menu-Poison.gif" />
+    <None Remove="sprites\Menu-Silence.gif" />
+    <None Remove="sprites\Menu-Toad.gif" />
+    <None Remove="sprites\NinjaSword.gif" />
+    <None Remove="sprites\RecoveryItem.gif" />
+    <None Remove="sprites\Ring.gif" />
+    <None Remove="sprites\Rod.gif" />
+    <None Remove="sprites\Shield.gif" />
+    <None Remove="sprites\Shuriken.gif" />
+    <None Remove="sprites\Spear.gif" />
+    <None Remove="sprites\Staff.gif" />
+    <None Remove="sprites\Summon.gif" />
+    <None Remove="sprites\Tent.gif" />
+    <None Remove="sprites\TrashCan.gif" />
+    <None Remove="sprites\Whip.gif" />
+    <None Remove="sprites\Wind.gif" />
+    <None Remove="sprites\Wrench.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="font\Final Fantasy IV SNES.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="font\kongtext.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Armor.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Arrow.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Axe.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Bomb.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Book.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Boomerang.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Bow.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Claw.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Clothes.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Crystal.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Dagger.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\DarkSword.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="font\Final_Fantasy_IV_SNES.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Gauntlet.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\HandCursor.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Harp.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Helmet.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\HolySword.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Hourglass.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Illusion.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Key.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\KnightSword.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Magma.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Mallet.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Menu-Darkness.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Menu-Mini.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Menu-Petrification.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Menu-Pig.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Menu-Poison.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Menu-Silence.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Menu-Toad.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\NinjaSword.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\RecoveryItem.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Ring.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Rod.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Shield.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Shuriken.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Spear.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Staff.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Summon.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Tent.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\TrashCan.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Whip.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Wind.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sprites\Wrench.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
     <PackageReference Include="System.Net.WebSockets" Version="4.3.0" />
     <PackageReference Include="WatsonWebsocket" Version="3.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Form1.resx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

@@ -28,23 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.buttonsPanel = new System.Windows.Forms.Panel();
+            this.itemsPanel = new System.Windows.Forms.Panel();
+            this.currentViewingTextbox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // textBox1
+            // buttonsPanel
             // 
-            this.textBox1.Location = new System.Drawing.Point(68, 48);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(796, 383);
-            this.textBox1.TabIndex = 0;
+            this.buttonsPanel.AutoSize = true;
+            this.buttonsPanel.Location = new System.Drawing.Point(12, 12);
+            this.buttonsPanel.Name = "buttonsPanel";
+            this.buttonsPanel.Size = new System.Drawing.Size(209, 527);
+            this.buttonsPanel.TabIndex = 2;
+            // 
+            // itemsPanel
+            // 
+            this.itemsPanel.AutoSize = true;
+            this.itemsPanel.Location = new System.Drawing.Point(241, 66);
+            this.itemsPanel.Name = "itemsPanel";
+            this.itemsPanel.Size = new System.Drawing.Size(260, 473);
+            this.itemsPanel.TabIndex = 3;
+            // 
+            // currentViewingTextbox
+            // 
+            this.currentViewingTextbox.Font = new System.Drawing.Font("Courier New", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.currentViewingTextbox.Location = new System.Drawing.Point(241, 12);
+            this.currentViewingTextbox.Name = "currentViewingTextbox";
+            this.currentViewingTextbox.Size = new System.Drawing.Size(260, 38);
+            this.currentViewingTextbox.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1107, 705);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(833, 627);
+            this.Controls.Add(this.currentViewingTextbox);
+            this.Controls.Add(this.itemsPanel);
+            this.Controls.Add(this.buttonsPanel);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -53,7 +73,8 @@
         }
 
         #endregion
-
-        private TextBox textBox1;
+        private Panel buttonsPanel;
+        private Panel itemsPanel;
+        private TextBox currentViewingTextbox;
     }
 }
