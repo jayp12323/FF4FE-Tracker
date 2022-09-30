@@ -9,8 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="font\Final Fantasy IV SNES.ttf" />
-    <None Remove="font\kongtext.ttf" />
     <None Remove="sprites\Armor.gif" />
     <None Remove="sprites\Arrow.gif" />
     <None Remove="sprites\Axe.gif" />
@@ -59,12 +57,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="font\Final Fantasy IV SNES.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="font\kongtext.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="sprites\Armor.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -99,9 +91,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="sprites\DarkSword.gif">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="font\Final_Fantasy_IV_SNES.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="sprites\Gauntlet.gif">

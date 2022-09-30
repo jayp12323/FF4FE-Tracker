@@ -14,19 +14,19 @@ namespace FF4FE
         public Sprites()
         {
             spritemap = new Dictionary<String, Bitmap>();
-            loadSprites();
-
-    
-
-
         }
 
-        void loadSprites()
+        public Dictionary<String, Bitmap> loadSprites()
         {
 
             string[] fileEntries = Directory.GetFiles("sprites/");
             foreach (string fileName in fileEntries)
-                spritemap.Add(fileName.Substring(8).ToLower().Replace(".gif",""), new Bitmap(fileName));
+            {
+                Bitmap sprite = new Bitmap(fileName);
+                Bitmap resized = new Bitmap(sprite, new Size(16,16));
+                spritemap.Add(fileName.Substring(8).ToLower().Replace(".gif", ""), resized);
+            }
+            return spritemap;
         }
     }
 

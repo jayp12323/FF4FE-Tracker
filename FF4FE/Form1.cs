@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data;
 using System.Drawing.Text;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using TextBox = System.Windows.Forms.TextBox;
+using Button = System.Windows.Forms.Button;
 
 namespace FF4FE
 {
@@ -20,19 +23,17 @@ namespace FF4FE
         Constants constants = new Constants();
         Dictionary<string, Town> towns ;
         String current_view_state="none";
-        PrivateFontCollection fontCollection;
+        List<string> others = new List<string>() { "Weapons", "Armor", "Items" };
+
         public Form1()
         {
             InitializeComponent();
-            fontCollection = new PrivateFontCollection();
-            fontCollection.AddFontFile("font/kongtext.ttf");
-            Sprites sprite_list = new Sprites();
+            this.Size = new Size(700, 600);
             towns = new();
             foreach (string town in constants.town_names)
                 towns.Add(town, new Town());
             location_buttons();
-            //pictureBox1.Image = sprite_list.spritemap["dagger"];
-
+            
             server();
         }
 
@@ -92,30 +93,7 @@ namespace FF4FE
             string town_name = location_name.Split(" ")[0];
             towns[town_name].add_shop(location, item_list);
 
-            if (town_name.Equals(current_view_state))
-            {
-                Debug.WriteLine("matched");
-
-                updateItemsPane();
-
-            }
-
-
-
-        }
-
-        public void shopTextBoxes(String location, List<string> items)
-        {
-
-            for (int i = 0; i < 2; i++)
-            {
-                for (int j = 0; j < 2; j++)
-                {
-
-                }
-
-
-            }
+            updateItemsPane(current_view_state);
 
 
 
@@ -152,12 +130,35 @@ namespace FF4FE
                     zzz += 1;
                 }
 
-                buttonsPanel.Controls.Add(buttons_panel_table);
+
+            }
+            buttonsPanel.Controls.Add(buttons_panel_table);
+
+            string[] other_buttons = { "Weapons", "Armor", "Items" };
+
+            int bottom_height = buttonsPanel.Size.Height;
+            Point buttons_location = buttonsPanel.Location;
+            TableLayoutPanel item_type_panel = new();
+            item_type_panel.RowCount = 3;
+            item_type_panel.ColumnCount = 1;
+            item_type_panel.AutoSize = true;
+            item_type_panel.Location= new Point(buttons_location.X+40,buttons_location.Y+20+ bottom_height);
+            Debug.WriteLine(buttons_location.X + " "+ buttons_location.Y);
+
+            //foreach(string button in other_buttons)
+            for (var i = 0; i < 3; i++)
+            {
+                Button newButton = new();
+                newButton.Name = other_buttons[i];
+                newButton.Text = other_buttons[i];
+                newButton.Size = new System.Drawing.Size(90, 35);
+                newButton.Click += buttonChangeView;
+                item_type_panel.Controls.Add(newButton,0,i);
 
             }
 
-            //string[] other_buttons = { "Weapons", "Armor", "Items" };
 
+            buttonsPanel.Controls.Add(item_type_panel);
 
 
         }
@@ -171,8 +172,6 @@ namespace FF4FE
             updateItemsPane(name);
 
         }
-
-
         public void updateItemsPane()
         {
             if (current_view_state.Equals("none"))
@@ -185,75 +184,260 @@ namespace FF4FE
         public void updateItemsPane(string name)
         {
 
-            List<string> others = new List<string>() { "Weapons", "Armor", "Items" };
-            if(!others.Contains(name))
+            current_view_state = name;
+
+            if (others.Contains(name))
             {
-                currentViewingTextbox.Text = "Viewing Items for: " + name;
+                this.Invoke((MethodInvoker)delegate
+                {
+                    if (this.Size.Width != 1500)
+                        this.Size = new Size(1500, 900);
+                });
+                itemsPanel.Invoke((MethodInvoker)delegate
+                {
+                    if (itemsPanel.Size.Width != 1200)
+                        itemsPanel.Size = new Size(1200, 700);
 
-                TableLayoutPanel items_panel_table = new();
-                items_panel_table.RowCount = 2;
-                items_panel_table.ColumnCount = 2;
-                items_panel_table.CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble;
+                });
+                currentViewingTextbox.Text = name;
 
-                items_panel_table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-                items_panel_table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-                items_panel_table.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-                items_panel_table.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-                items_panel_table.Dock = DockStyle.Fill;
+
+
+                Dictionary<string, List<Tuple<string, Bitmap>>> all_item_type = return_all_type(name);
+                TableLayoutPanel stores_table_panel = new();
+
+                stores_table_panel.RowCount = 3;
+                stores_table_panel.ColumnCount = 5;
+                stores_table_panel.CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble;
+
+                stores_table_panel.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+                stores_table_panel.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+                stores_table_panel.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+                stores_table_panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+                stores_table_panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+                stores_table_panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+                stores_table_panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+                stores_table_panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+                stores_table_panel.Dock = DockStyle.Fill;
+
+
+                int store_count = all_item_type.Count;
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 5; j++)
+                    {
+
+                        if(i*5+j > store_count-1)
+                        {
+                            break;
+                        }
+
+                        TableLayoutPanel store_panel = new();
+
+                        store_panel.RowCount = 2;
+                        store_panel.ColumnCount = 1;
+
+                        store_panel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20));
+                        store_panel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                        store_panel.Dock = DockStyle.Fill;
+                        store_panel.BackColor = Color.DarkBlue;
+
+
+                        List<Tuple<string, Bitmap>> shop = all_item_type.ElementAt(i * 5 + j).Value;
+                        string town_name = all_item_type.ElementAt(i * 5 + j).Key;
+                        int count = shop.Count;
+
+
+                        TextBox town_textbox = new TextBox();
+
+                        town_textbox.Dock = DockStyle.Top;
+                        town_textbox.Text = town_name;
+                        town_textbox.Font = new Font(FontFamily.GenericMonospace, 11, FontStyle.Bold);
+                        town_textbox.BackColor = Color.Blue;
+                        town_textbox.ForeColor = Color.White;
+                        town_textbox.BorderStyle = BorderStyle.None;
+                        town_textbox.Height = 12;
+                        town_textbox.Margin = new Padding(0);
+
+
+                        TableLayoutPanel item_panel = new();
+                        item_panel.BackColor = Color.DarkBlue;
+                        item_panel.RowCount = 8;
+                        item_panel.ColumnCount = 2;
+                        item_panel.Dock = DockStyle.Fill;
+
+                        item_panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+                        item_panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 90F));
+
+
+
+                        for (int k = 0; k < count; k++)
+                        {
+
+                            TextBox textbox = new TextBox();
+
+                            //textbox.Dock = DockStyle.Fill;
+                            textbox.Text = shop[k].Item1; 
+                            textbox.Font = new Font(FontFamily.GenericMonospace, 12, FontStyle.Bold);
+                            textbox.BackColor = Color.DarkBlue;
+                            textbox.ForeColor = Color.White;
+                            textbox.BorderStyle = BorderStyle.None;
+                            textbox.Height = 16;
+                            textbox.Margin = new Padding(0);
+
+
+                            PictureBox sprite = new PictureBox();
+                            sprite.Image = shop[k].Item2;
+                            sprite.Size = new Size(14, 14);
+                            sprite.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+
+                            item_panel.Controls.Add(sprite, 0, k);
+                            item_panel.Controls.Add(textbox, 1, k);
+                        }
+
+                        store_panel.Controls.Add(town_textbox,0,0);
+                        store_panel.Controls.Add(item_panel,1,0);
+
+                        stores_table_panel.Controls.Add(store_panel, j, i);
+
+                    }
+
+                }
+                itemsPanel.Invoke((MethodInvoker)delegate
+                {
+                    itemsPanel.Controls.Clear();
+                    itemsPanel.Controls.Add(stores_table_panel);
+                });
+
+
+            }
+            else
+            {
+                currentViewingTextbox.Text = name;
+
+                TableLayoutPanel stores_table_panel = new();
+                stores_table_panel.RowCount = 2;
+                stores_table_panel.ColumnCount = 2;
+                stores_table_panel.CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble;
+
+                stores_table_panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+                stores_table_panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+                stores_table_panel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+                stores_table_panel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+                stores_table_panel.Dock = DockStyle.Fill;
 
 
                 Town town = towns[name];
-                Debug.WriteLine(town.weapon_shop.ToString());
-
-                
-                TextBox weapontextBox = new TextBox();
-                weapontextBox.Multiline = true;
-                weapontextBox.Dock = DockStyle.Fill;
-                weapontextBox.Text = town.weapon_shop.ToString();
-                weapontextBox.Font = new Font(FontFamily.GenericMonospace, 14,FontStyle.Bold);
-                weapontextBox.BackColor = Color.DarkBlue;
-                weapontextBox.ForeColor = Color.White;
-               
-                TextBox armortextBox = new TextBox();
-                armortextBox.Multiline = true;
-                armortextBox.Dock = DockStyle.Fill;
-                armortextBox.Text = town.armor_shop.ToString();
-                armortextBox.Font = new Font(FontFamily.GenericMonospace, 14, FontStyle.Bold);
-                armortextBox.BackColor = Color.DarkBlue;
-                armortextBox.ForeColor = Color.White;
-
-                TextBox itemstextBox = new TextBox();
-                itemstextBox.Multiline = true;
-                itemstextBox.Dock = DockStyle.Fill;
-                itemstextBox.Text = town.item_shop.ToString();
-                itemstextBox.Font = new Font(FontFamily.GenericMonospace, 14, FontStyle.Bold);
-                itemstextBox.BackColor = Color.DarkBlue;
-                itemstextBox.ForeColor = Color.White;
-
-                TextBox othertextBox = new TextBox();
-                othertextBox.Multiline = true;
-                othertextBox.Dock = DockStyle.Fill;
-                othertextBox.Text = town.other_shop.ToString();
-                othertextBox.Font = new Font(FontFamily.GenericMonospace, 14, FontStyle.Bold);
-                othertextBox.BackColor = Color.DarkBlue;
-                othertextBox.ForeColor = Color.White;
+                List<List<Tuple<string, Bitmap>>> shops = new();
+                shops.Add(town.weapon_shop.return_items());
+                shops.Add(town.item_shop.return_items());
+                shops.Add(town.armor_shop.return_items());
+                shops.Add(town.other_shop.return_items());
 
 
-                items_panel_table.Controls.Add(weapontextBox, 0, 0);
-                items_panel_table.Controls.Add(armortextBox, 1, 0);
-                items_panel_table.Controls.Add(itemstextBox, 0, 1);
-                items_panel_table.Controls.Add(othertextBox, 1, 1);
+                int i = 0;
+                foreach(List<Tuple<string, Bitmap>> shop  in shops)
+                {
+                    string i_bin = Convert.ToString(i, 2).PadLeft(2, '0');
+                    int x = int.Parse(i_bin.Substring(0,1));
+                    int y = int.Parse(i_bin.Substring(1, 1));
+                    int count = shop.Count();
+
+                    TableLayoutPanel item_panel = new();
+                    item_panel.BackColor = Color.DarkBlue;
+                    item_panel.RowCount = 8;
+                    item_panel.ColumnCount = 2;
+                    item_panel.Dock = DockStyle.Fill;
+
+
+                    item_panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
+                    item_panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 85F));
+                    
+                    for (int j = 0; j < count; j++)
+                    {
+                        TextBox textbox = new TextBox();
+                        textbox.Dock = DockStyle.Fill;
+                        textbox.Text = shop[j].Item1; ;
+                        textbox.Font = new Font(FontFamily.GenericMonospace, 15, FontStyle.Bold);
+                        textbox.BackColor = Color.DarkBlue;
+                        textbox.ForeColor = Color.White;
+                        textbox.BorderStyle = BorderStyle.None;
+                        textbox.Height=16;
+                        textbox.Margin = new Padding(0);
+
+
+                        PictureBox sprite = new PictureBox();
+                        sprite.Image = shop[j].Item2;
+                        sprite.Size = new Size(16, 16);
+                        sprite.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+
+                        item_panel.Controls.Add(sprite, 0, j);
+                        item_panel.Controls.Add(textbox, 1, j);
+
+                    }
+                    stores_table_panel.Controls.Add(item_panel, x, y);
+
+                    i += 1;
+
+                }
 
                 itemsPanel.Invoke((MethodInvoker)delegate
                 {
                     itemsPanel.Controls.Clear();
-                    itemsPanel.Controls.Add(items_panel_table);
+                    itemsPanel.Size = new Size(400, 475);
+
+                    itemsPanel.Controls.Add(stores_table_panel);
                 });
+                this.Invoke((MethodInvoker)delegate
+                {
+                    this.Size = new Size(700, 600);
+                });
+
                 current_view_state = name;
             }
 
 
         }
+
+
+        public Dictionary<string, List<Tuple<string, Bitmap>>> return_all_type(string type)
+        {
+
+            Dictionary<string, List<Tuple<string, Bitmap>>> shops = new();
+
+            foreach(string town in constants.town_names)
+            {
+
+                switch(type)
+                {
+                    case "Weapons":
+                        shops.Add(town,towns[town].weapon_shop.return_items());
+                        break;
+
+                    case "Armor":
+                        if(town.Equals("Fabul"))
+                            shops.Add(town, towns[town].weapon_shop.return_items());
+                        else
+                            shops.Add(town, towns[town].armor_shop.return_items());
+                        break;
+
+                    case "Items":
+                        shops.Add(town, towns[town].item_shop.return_items());
+                        if (town.Equals("Troia"))
+                            shops.Add(town+" Cafe", towns[town].other_shop.return_items());
+                        break;
+                }
+
+
+
+
+            }
+
+
+            return shops;
+        }
+
+
 
     }
 }
